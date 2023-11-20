@@ -103,7 +103,7 @@ class DrawingPublisher : public m3t::Publisher {
 
 int main(int argc, char* argv[]) {
   const std::filesystem::path configfile_path{
-      "../../data/pen_paper_demo/config.yaml"};
+      "../../data/pen_paper_demo/config_rs.yaml"};
 
   // Generate tracker
   std::shared_ptr<m3t::Tracker> tracker_ptr;
