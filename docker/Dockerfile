@@ -28,7 +28,11 @@ RUN apt-get update && apt-get install -y \
     libomp-dev \ 
     libopenmpi-dev \
     libhdf5-dev \
-    graphviz
+    graphviz \ 
+    gdb \
+    doxygen \
+    eog \ 
+    vim
     # libopencv-dev
 
 # Utilitaires
