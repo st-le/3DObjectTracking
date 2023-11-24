@@ -33,11 +33,23 @@ target_link_libraries(parameter_study_rtb_dataset PUBLIC m3t)
 add_executable(run_on_recorded_sequence run_on_recorded_sequence.cpp)
 target_link_libraries(run_on_recorded_sequence PUBLIC m3t)
 
+# add_executable(run_on_recorded_sequence_polyamber run_on_recorded_sequence_polyamber.cpp)
+# target_link_libraries(run_on_recorded_sequence_polyamber PUBLIC m3t)
+
 add_executable(run_generated_tracker run_generated_tracker.cpp)
 target_link_libraries(run_generated_tracker PUBLIC m3t)
 
 add_executable(run_pen_paper_demo run_pen_paper_demo.cpp)
 target_link_libraries(run_pen_paper_demo PUBLIC m3t)
+
+# add_executable(run_poly_demo run_poly_demo.cpp)
+# target_link_libraries(run_poly_demo PUBLIC m3t)
+
+add_executable(run_vase_demo run_vase_demo.cpp)
+target_link_libraries(run_vase_demo PUBLIC m3t)
+
+add_executable(run_rooster_demo run_rooster_demo.cpp)
+target_link_libraries(run_rooster_demo PUBLIC m3t)
 
 add_executable(constraint_convergence constraint_convergence.cpp)
 target_link_libraries(constraint_convergence PUBLIC m3t)

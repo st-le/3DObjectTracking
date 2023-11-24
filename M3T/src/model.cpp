@@ -180,7 +180,12 @@ bool Model::AddBodiesToRenderer(
     auto copied_body_ptr{std::make_shared<Body>(*body_ptr)};
     copied_body_ptr->set_body2world_pose(Transform3fA::Identity());
     copied_body_ptr->set_body_id(body_id);
-    if (!renderer_geometry_ptr->AddBody(copied_body_ptr)) return false;
+    if (!renderer_geometry_ptr->AddBody(copied_body_ptr)) 
+    {
+      std::cerr << "Could not add body " << body_ptr->name() << " to renderer "
+                << renderer_geometry_ptr->name() << std::endl;
+      // return false;  // just don't add and continue as normal
+    }
 
     // Set clip space limits
     renderer_ptr->set_z_min(std::min(z_min, renderer_ptr->z_min()));

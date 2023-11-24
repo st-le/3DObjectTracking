@@ -1,0 +1,101 @@
+%YAML:1.2
+RealSenseColorCamera:
+  - name: color_camera
+    metafile_path: config.yaml
+
+RealSenseDepthCamera:
+  - name: depth_camera
+    metafile_path: config.yaml
+
+NormalColorViewer:
+  - name: color_viewer
+    metafile_path: config.yaml
+    color_camera: color_camera
+    renderer_geometry: renderer_geometry
+
+NormalDepthViewer:
+  - name: depth_viewer
+    metafile_path: config.yaml
+    depth_camera: depth_camera
+    renderer_geometry: renderer_geometry
+
+RendererGeometry:
+  - name: renderer_geometry
+    bodies: [vase]
+
+FocusedSilhouetteRenderer:
+  - name: silhouette_renderer_texture
+    renderer_geometry: renderer_geometry
+    camera: color_camera
+    referenced_bodies: [vase]
+
+Body:
+  - name: vase
+    metafile_path: vase_body.yaml
+
+RegionModel:
+  - name: vase_region_model
+    metafile_path: default_model.yaml
+    body: vase
+    fixed_bodies: [vase]
+
+DepthModel:
+  - name: vase_depth_model
+    metafile_path: default_model.yaml
+    body: vase
+
+RegionModality:
+  - name: vase_region_modality
+    metafile_path: vase_region_modality.yaml
+    body: vase
+    color_camera: color_camera
+    region_model: vase_region_model
+    measure_occlusions: {depth_camera: depth_camera}
+
+DepthModality:
+  - name: vase_depth_modality
+    metafile_path: config.yaml
+    body: vase
+    depth_camera: depth_camera
+    depth_model: vase_depth_model
+
+# TextureModality:
+#   - name: vase_texture_modality
+#     metafile_path: config.yaml
+#     body: vase
+#     color_camera: color_camera
+#     focused_silhouette_renderer: silhouette_renderer_texture
+#     measure_occlusions: {depth_camera: depth_camera}
+
+Link:
+  - name: vase_link
+    body: vase
+    modalities: [vase_region_modality, vase_depth_modality]    #optional vase_texture_modality, vase_depth_modality
+
+Optimizer:
+  - name: vase_optimizer
+    root_link: vase_link
+
+StaticDetector:
+  - name: vase_detector
+    metafile_path: vase_detector.yaml
+    optimizer: vase_optimizer
+
+Tracker:
+  - name: tracker
+    metafile_path: config.yaml
+    viewers: [color_viewer, depth_viewer]
+    detectors: [vase_detector]
+    optimizers: [vase_optimizer]
+
+depth_offset: -0.013
+measure_occlusions: 1
+measured_occlusion_threshold: 0.01
+
+# visualization_time: 1
+# visualize_correspondences_correspondence: 1
+# visualize_lines_correspondence: 1
+# min_depth: 0.2
+# max_depth: 0.5
+# visualization_min_depth: 0.2
+# visualization_max_depth: 0.5
